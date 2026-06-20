@@ -1,0 +1,95 @@
+@import "tailwindcss";
+
+:root {
+  --bg: #0b0b0c;
+  --panel: #111113;
+  --edge: #27272a;
+  --fg: #e4e4e7;
+  --muted: #6f6f76;
+  --muted-2: #4b4b50;
+  --accent: #e8b76a;
+  --accent-dim: #3a2f1c;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-panel: var(--panel);
+  --color-edge: var(--edge);
+  --color-fg: var(--fg);
+  --color-muted: var(--muted);
+  --color-muted-2: var(--muted-2);
+  --color-accent: var(--accent);
+  --color-accent-dim: var(--accent-dim);
+  --font-display: "Silkscreen", monospace;
+  --font-mono: var(--font-geist-mono), monospace;
+}
+
+* {
+  border-color: var(--edge);
+}
+
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-mono), monospace;
+}
+
+/* Diagonal hatch divider, used between sections */
+.hatch {
+  position: relative;
+  height: 1.5rem;
+  border-left: 1px solid var(--edge);
+  border-right: 1px solid var(--edge);
+}
+.hatch::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  left: -100vw;
+  right: -100vw;
+  background-image: repeating-linear-gradient(
+    315deg,
+    var(--edge) 0,
+    var(--edge) 1px,
+    transparent 0,
+    transparent 8px
+  );
+  opacity: 0.5;
+}
+
+/* Corner tick marks for the frame */
+.tick {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+}
+.tick::before,
+.tick::after {
+  content: "";
+  position: absolute;
+  background: var(--muted-2);
+}
+.tick::before {
+  width: 100%;
+  height: 1px;
+  top: 50%;
+}
+.tick::after {
+  width: 1px;
+  height: 100%;
+  left: 50%;
+}
+
+/* Dot grid background for the header band */
+.dot-grid {
+  background-image: radial-gradient(var(--edge) 1px, transparent 1px);
+  background-size: 14px 14px;
+}
+
+@keyframes blink {
+  0%, 49% { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+.cursor-blink {
+  animation: blink 1s step-end infinite;
+}
